@@ -9,8 +9,8 @@ public class UserService {
     public static void login(String login, String password) {
 
         for (int i = 0; i < Storage.USERS.length; i++) {
-            if ((Storage.USERS[i].login.equals(login)) && (Storage.USERS[i].password).equals(password)) {
-                System.out.print("Вы вошли как: " + Storage.USERS[i].role.getDescription() + " - " + Storage.USERS[i].userName+ "\n");
+            if ((Storage.USERS[i].getLogin().equals(login)) && (Storage.USERS[i].getPassword()).equals(password)) {
+                System.out.print("Вы вошли как: " + Storage.USERS[i].getRole().getDescription() + " - " + Storage.USERS[i].getUserName()+ "\n");
                 currentUser = Storage.USERS[i];
             }
         }

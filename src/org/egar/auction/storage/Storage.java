@@ -38,8 +38,8 @@ public class Storage {
     public static int summaOfBidForItem (int code){
         int summa=0;
         for(int i=0; i<100; i++){
-            if (arrayOfBid[i].code==code)
-                summa+=arrayOfBid[i].value;
+            if (arrayOfBid[i].getCode()==code)
+                summa+=arrayOfBid[i].getValue();
             }
         return summa;
     }

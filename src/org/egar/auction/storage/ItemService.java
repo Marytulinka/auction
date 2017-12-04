@@ -17,8 +17,8 @@ public class ItemService {
             System.out.println(i.getDescription() + ":");
             System.out.println();
             for (int j = 0; j < Storage.ITEMS.length; j++) {
-                if (i.equals(Storage.ITEMS[j].category)) {
-                    System.out.println(Storage.ITEMS[j].name + "; код:" + Storage.ITEMS[j].code + "; цена: " + Storage.ITEMS[j].price);
+                if (i.equals(Storage.ITEMS[j].getCategory())) {
+                    System.out.println(Storage.ITEMS[j].getName() + "; код:" + Storage.ITEMS[j].getCode() + "; цена: " + Storage.ITEMS[j].getPrice());
                 }
             }
             System.out.println();
@@ -30,11 +30,11 @@ public class ItemService {
         Item itemForAuction = null;
         int j = 0;
         for (int i = 0; i < Storage.ITEMS.length; i++) {
-            if (code == (Storage.ITEMS[i].code))
+            if (code == (Storage.ITEMS[i].getCode()))
                 itemForAuction = Storage.ITEMS[i]; //break;
         }
-        System.out.println("лот: " + itemForAuction.name + "; начальная цена: " + itemForAuction.price + "; текущая цена: "
-                + (itemForAuction.price + Storage.summaOfBidForItem(code)));
+        System.out.println("лот: " + itemForAuction.getName() + "; начальная цена: " + itemForAuction.getPrice() + "; текущая цена: "
+                + (itemForAuction.getPrice() + Storage.summaOfBidForItem(code)));
         boolean comp;
         do {
             System.out.println("Введите вашу ставку (целое число):");
@@ -45,8 +45,8 @@ public class ItemService {
             }
             Storage.arrayOfBid[j] = new Bid(bid, currentUser, code);
             j++;
-            System.out.println("лот:" + itemForAuction.name + "; ставка от пользователя" + currentUser.userName + " - " + bid +
-                    "; текущая цена: " + (itemForAuction.price + bid));
+            System.out.println("лот:" + itemForAuction.getName() + "; ставка от пользователя" + currentUser.getUserName() + " - " + bid +
+                    "; текущая цена: " + (itemForAuction.getPrice() + bid));
             System.out.println("Продолжать аукцион? Y/N");
             Scanner sc1 = new Scanner(System.in);
             String cont = sc1.nextLine();
