@@ -8,28 +8,28 @@ public class Bid {
     private User user; //пользователь,установивший ставку
     private int code; //код товара
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
 
-    public void setValue(){
-        this.value=value;
+    public void setValue() {
+        this.value = value;
     }
 
-    public void setUser(){
-        this.user=user;
+    public void setUser() {
+        this.user = user;
     }
 
-    public void setCode(){
-        this.code=code;
+    public void setCode() {
+        this.code = code;
     }
 
     public Bid(int value, User user, int code) {

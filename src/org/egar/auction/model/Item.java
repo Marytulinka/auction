@@ -1,4 +1,5 @@
 package org.egar.auction.model;
+
 /**
  * Характеристики товара: наименование, цена, категория, код
  */
@@ -8,44 +9,34 @@ public class Item {
     private Category category;
     private float price;
     private int code;
+    private boolean solded;
 
-    public Item(String name, Category category, float price, int code){
-        this.name=name;
-        this.category=category;
-        this.price=price;
-        this.code=code;
+    public Item(String name, Category category, float price, int code, boolean solded) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.code = code;
+        this.solded = solded;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Category getCategory(){
+    public Category getCategory() {
         return category;
     }
 
-    public float getPrice(){
+    public float getPrice() {
         return price;
     }
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
 
-    public void setName(){
-        this.name=name;
-    }
-
-    public void setCategory(){
-        this.category=category;
-    }
-
-    public void setPrice(){
-        this.price=price;
-    }
-
-    public void setCode(){
-        this.code=code;
+    public boolean isSolded() {
+        return solded;
     }
 }
 

@@ -26,21 +26,6 @@ public class User {
         return role;
     }
 
-    public void setLogin() {
-        this.login = login;
-    }
-
-    public void setPassword() {
-        this.password = password;
-    }
-
-    public void setUserName() {
-        this.userName = userName;
-    }
-
-    public void setRole() {
-        this.role = role;
-    }
 
     public User(String login,String password,String userName,Role role){
         this.login=login;

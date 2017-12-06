@@ -1,6 +1,7 @@
-package org.egar.auction.storage;
+package org.egar.auction.controller;
 
 import org.egar.auction.model.User;
+import org.egar.auction.storage.Storage;
 
 public class UserService {
 
@@ -17,6 +18,7 @@ public class UserService {
         if (currentUser == null) {
             System.out.print("Неверный логин или пароль");
         }
+        System.out.print("");
     }
 }
 
