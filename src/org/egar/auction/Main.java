@@ -23,6 +23,8 @@ public class Main {
                 Scanner sos = new Scanner(System.in);
                 int searchOrSorting = sos.nextInt();
                 switch (searchOrSorting) {
+                    case 1:
+                        System.out.println("Пока не написала");
                     case 2:
                         boolean contSearch = true;
                         while (contSearch) {
@@ -32,8 +34,8 @@ public class Main {
                             ShowItems.searhFromItemList(searchName);
                             System.out.println("Завершить поиск? Y/N");
                             String end = sn.nextLine();
-                            if (end.equals("Y")) contSearch = false;
-                            if (end.equals("N")) contSearch = true;
+                            if (end.equalsIgnoreCase("Y")) contSearch = false;
+                            if (end.equalsIgnoreCase("N")) contSearch = true;
                         }
                         break;
                     case 3:
@@ -50,7 +52,15 @@ public class Main {
 
                         }
                         break;
+                    case 4:
+                        ShowItems.viewItems();
+                        System.out.print("Тут будет условие для возврата в меню гостевого режима");
+                    case 5:
+                        System.out.print("Тут будет возврат в главное меню");
+
                 }
+
+
         }
 
     }
