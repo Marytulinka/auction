@@ -14,42 +14,45 @@ public class Main {
 
 
         Menu.showMainMenu();
-        Scanner sc = new Scanner(System.in);
-        int role = sc.nextInt();
+        Scanner mc = new Scanner(System.in);
+        int mainChoice = mc.nextInt();
+        switch (mainChoice) {
+            case 1:
+                ShowItems.viewItems();
+                Menu.searchSortingAndShowBids();
+                Scanner sos = new Scanner(System.in);
+                int searchOrSorting = sos.nextInt();
+                switch (searchOrSorting) {
+                    case 2:
+                        boolean contSearch = true;
+                        while (contSearch) {
+                            System.out.println("Введите наименование товара для поиска: ");
+                            Scanner sn = new Scanner(System.in);
+                            String searchName = sn.nextLine();
+                            ShowItems.searhFromItemList(searchName);
+                            System.out.println("Завершить поиск? Y/N");
+                            String end = sn.nextLine();
+                            if (end.equals("Y")) contSearch = false;
+                            if (end.equals("N")) contSearch = true;
+                        }
+                        break;
+                    case 3:
+                        boolean contViewOfBids = true;
+                        while (contViewOfBids) {
+                            System.out.print("Введите код товара для просмотра ставок: ");
+                            Scanner boi = new Scanner(System.in);
+                            int bidOfItem = boi.nextInt();
+                            ShowItems.viewBidOfItem(bidOfItem);
+                            System.out.println("Хотите выбрать другой товар? Y/N");
+                            String endViewOfBids = boi.nextLine();
+                            if (endViewOfBids.equalsIgnoreCase("Y")) contViewOfBids = false;
+                            if (endViewOfBids.equalsIgnoreCase("N")) contViewOfBids = true;
 
-        if (role == 1)
-        {
-            System.out.print("Вам доступен только просмотр каталога товаров");
-            ShowItems.viewItems();
+                        }
+                        break;
+                }
         }
-        if (role == 2)
 
-        { //зашли как пользователь
-            do { //авторизуемся
-                Scanner in = new Scanner(System.in);
-                System.out.println();
-                System.out.print("Введите логин: ");
-                String login = in.nextLine();
-                System.out.print("Введите пароль: ");
-                String password = in.nextLine();
-                System.out.print("");
-                UserService.login(login, password);
-            }
-            while (UserService.currentUser == null);
-            Scanner sc3 = new Scanner(System.in);
-            Menu.showUserMenu();
-            String action = sc3.nextLine();
-            switch (action) {
-                case "1": //отображение каталога товаров
-                    ShowItems.viewItems();
-                    break;
-                case "2":
-                    System.out.print("Введите код товара для участия в аукционе: ");
-                    Scanner sc4 = new Scanner(System.in);
-                    int code = sc4.nextInt();
-                    ItemService.makeBidOfItem(code);
-            }
-        }
     }
 }
 
