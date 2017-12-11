@@ -40,6 +40,7 @@ public class ShowItems {
                 else System.out.println("Наименование товара: " + item.getName()
                         + "; категория товара: " + item.getCategory() + "; цена: " + item.getPrice() + "; есть в наличии: нет");
             }
+            else System.out.println("Такого товара нет в каталоге");
         }
     }
 
@@ -49,7 +50,6 @@ public class ShowItems {
         for (Item item : Storage.items) {
             if (code == (item.getCode())) itemForAuction = item;
         }
-
         if (itemForAuction.isSolded()) System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - продан");
         else {
             if (Storage.bids.isEmpty()) System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - пока нет ставок");
