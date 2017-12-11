@@ -1,12 +1,14 @@
 package org.egar.auction;
 
-
-import org.egar.auction.controller.ItemService;
 import org.egar.auction.controller.UserService;
+import org.egar.auction.model.Role;
 import org.egar.auction.view.Menu;
 import org.egar.auction.view.ShowItems;
 
 import java.util.Scanner;
+
+import static org.egar.auction.controller.UserService.currentUser;
+
 
 public class Main {
 
@@ -57,6 +59,27 @@ public class Main {
                         System.out.print("Тут будет условие для возврата в меню гостевого режима");
                     case 5:
                         System.out.print("Тут будет возврат в главное меню");
+
+                }
+            case 2:
+                boolean authMode = true;
+                while (authMode) {
+                    Scanner lp = new Scanner(System.in);
+                    System.out.println("Введите логин: ");
+                    String login = lp.nextLine();
+                    System.out.println("Введите пароль: ");
+                    String pass = lp.nextLine();
+                    UserService.login(login, pass);
+                    if (currentUser.getRole() == Role.ADMIN)
+                        UserService.statistics();
+                    else System.out.print("Необходимо войти как администратор");
+                    System.out.print("Для выхода из профиля введите - 1;\nДля возврата в главное меню - 2.");
+                    int des = lp.nextInt();
+                    if (des == 1) {
+                        currentUser = null;
+                        authMode = false;
+                    }
+                    //if(des==2) {}
 
                 }
 
