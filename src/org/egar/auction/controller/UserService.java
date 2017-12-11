@@ -1,5 +1,7 @@
 package org.egar.auction.controller;
 
+import org.egar.auction.model.Bid;
+import org.egar.auction.model.Role;
 import org.egar.auction.model.User;
 import org.egar.auction.storage.Storage;
 
@@ -9,10 +11,10 @@ public class UserService {
 
     public static void login(String login, String password) {
 
-        for (int i = 0; i < Storage.USERS.length; i++) {
-            if ((Storage.USERS[i].getLogin().equals(login)) && (Storage.USERS[i].getPassword()).equals(password)) {
-                System.out.print("Вы вошли как: " + Storage.USERS[i].getRole().getDescription() + " - " + Storage.USERS[i].getUserName()+ "\n");
-                currentUser = Storage.USERS[i];
+        for (User user : Storage.users) {
+            if ((user.getLogin().equals(login)) && (user.getPassword()).equals(password)) {
+                System.out.print("Вы вошли как: " + user.getRole().getDescription() + " - " + user.getUserName() + "\n");
+                currentUser = user;
             }
         }
         if (currentUser == null) {
@@ -20,7 +22,27 @@ public class UserService {
         }
         System.out.print("");
     }
+
+    public static void statistics() {
+
+        int amountOfItems = 0;
+        int amountOfBids = 0;
+        System.out.println("Статистика по пользователям: \n");
+        if (Storage.bids.isEmpty()) System.out.println("Нет данных для просмотра");
+        for (User user : Storage.users) {
+            if(user.getRole() == Role.USER) {
+                for (Bid bid : Storage.bids) {
+                    if (user.getLogin().equals(bid.getUser().getLogin())) {
+                        amountOfItems +=bid. ;
+                        amountOfBids += ;
+                    }
+                }
+                System.out.println(user.getUserName() + " " + amountOfItems + " " + amountOfBids);
+            }
+        }
+    }
 }
+
 
 
 
