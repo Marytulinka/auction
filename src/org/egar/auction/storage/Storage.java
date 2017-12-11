@@ -8,12 +8,13 @@ import java.util.List;
 
 public class Storage {
 
-    public static final User[] USERS = new User[3];
+    public static List<User> users = new ArrayList<>();
 
     static {
-        USERS[0] = new User("user", "12345", "Имя пользователя 1", Role.USER);
-        USERS[1] = new User("admin", "12345", "Администратор", Role.ADMIN);
-        USERS[2] = new User("", "", "", Role.GUEST);
+        users.add(new User("user", "12345", "Иванов Иван", Role.USER));
+        users.add(new User("user2", "12345", "Петров Петр", Role.USER));
+        users.add(new User("admin", "12345", "Администратор", Role.ADMIN));
+        users.add(new User("", "", "", Role.GUEST));
     }
 
     public static List<Item> items = new ArrayList<>();
@@ -31,6 +32,13 @@ public class Storage {
     }
 
     public static List<Bid> bids = new ArrayList<>();
+
+    static {
+        bids.add(new Bid(7800,users.get(0) , 7));
+        bids.add(new Bid(2000,users.get(0) , 8));
+        bids.add(new Bid(1700,users.get(1) , 9));
+
+    }
 
     public static List<Item> purchase = new ArrayList<>();
 }
