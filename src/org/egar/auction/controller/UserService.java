@@ -27,8 +27,9 @@ public class UserService {
     public static void statistics() {
 
         System.out.println("Статистика по пользователям: \n");
-        if (Storage.bids.isEmpty()) System.out.println("Нет данных для просмотра");
-        else System.out.println("-- Пользователь -- Кол-во его лотов -- Кол-во его ставок");
+        if (Storage.bids.isEmpty()&&Storage.purchase.isEmpty()) {
+            System.out.println("Нет данных для просмотра");
+        } else System.out.println("-- Пользователь -- Кол-во его лотов -- Кол-во его ставок");
         for (User user : Storage.users) {
             int amountOfItems = 0;
             int amountOfBids = 0;
@@ -42,7 +43,7 @@ public class UserService {
                         amountOfBids += 1;
                 }
             }
-            System.out.println(user.getUserName() + " " + amountOfItems + " " + amountOfBids);
+             System.out.println(user.getUserName() + " " + amountOfItems + " " + amountOfBids);
         }
     }
 }
