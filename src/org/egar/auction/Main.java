@@ -21,8 +21,10 @@ public class Main {
         int mainChoice = mc.nextInt();
         switch (mainChoice) {
             case 1:
-                ShowItems.viewItems();
-                Menu.searchSortingAndShowBids();
+                boolean whatToSHow = ShowItems.viewItems();
+                if(whatToSHow) break;
+                    else{
+                Menu.searchSortingAndShowBids();}
                 Scanner sos = new Scanner(System.in);
                 int searchOrSorting = sos.nextInt();
                 switch (searchOrSorting) {
@@ -57,9 +59,9 @@ public class Main {
                         break;
                     case 4:
                         ShowItems.viewItems();
-                        System.out.print("Тут будет условие для возврата в меню гостевого режима");
+                        System.out.println("Тут будет условие для возврата в меню гостевого режима");
                     case 5:
-                        System.out.print("Тут будет возврат в главное меню");
+                        System.out.println("Тут будет возврат в главное меню");
 
                 }
             case 2:
