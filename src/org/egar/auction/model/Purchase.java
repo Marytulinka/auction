@@ -11,10 +11,6 @@ public class Purchase {
 
     }
 
-    public Item getItem (){
-        return item;
-    }
-
     public User getUser(){
         return user;
     }
