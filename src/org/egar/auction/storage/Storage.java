@@ -14,7 +14,6 @@ public class Storage {
         users.add(new User("user", "12345", "Иванов Иван", Role.USER));
         users.add(new User("user2", "12345", "Петров Петр", Role.USER));
         users.add(new User("admin", "12345", "Администратор", Role.ADMIN));
-        users.add(new User("", "", "", Role.GUEST));
     }
 
     public static List<Item> items = new ArrayList<>();
@@ -34,19 +33,20 @@ public class Storage {
     public static List<Bid> bids = new ArrayList<>();
 
     static {
-        bids.add(new Bid(29000,users.get(0) , 1));
-        bids.add(new Bid(28900,users.get(1) , 1));
-        bids.add(new Bid(37900,users.get(0) , 2));
-        bids.add(new Bid(38000,users.get(1) , 2));
+        bids.add(new Bid(29000, users.get(0), 1));
+        bids.add(new Bid(28850, users.get(1), 1));
+        bids.add(new Bid(28900, users.get(1), 1));
+        bids.add(new Bid(37900, users.get(0), 2));
+        bids.add(new Bid(38000, users.get(1), 2));
 
 
     }
 
     public static List<Purchase> purchase = new ArrayList<>();
 
-    static{
-        purchase.add(new Purchase(items.get(0),users.get(0)));
-        purchase.add(new Purchase(items.get(1),users.get(1)));
+    static {
+//        purchase.add(new Purchase(items.get(0),users.get(0)));
+//        purchase.add(new Purchase(items.get(1),users.get(1)));
 
 
     }
