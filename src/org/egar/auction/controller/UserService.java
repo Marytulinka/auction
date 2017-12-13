@@ -1,8 +1,6 @@
 package org.egar.auction.controller;
 
-import org.egar.auction.model.Bid;
-import org.egar.auction.model.Purchase;
-import org.egar.auction.model.Role;
+
 import org.egar.auction.model.User;
 import org.egar.auction.storage.Storage;
 
