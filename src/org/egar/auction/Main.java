@@ -4,6 +4,7 @@ import org.egar.auction.controller.UserService;
 import org.egar.auction.model.Role;
 import org.egar.auction.view.Menu;
 import org.egar.auction.view.ShowItems;
+import org.egar.auction.view.Statistics;
 
 import java.util.Scanner;
 
@@ -71,7 +72,7 @@ public class Main {
                     String pass = lp.nextLine();
                     UserService.login(login, pass);
                     if (currentUser.getRole() == Role.ADMIN)
-                        UserService.statistics();
+                        Statistics.statistics();
                     else System.out.print("Необходимо войти как администратор");
                     System.out.print("Для выхода из профиля введите - 1;\nДля возврата в главное меню - 2.");
                     int des = lp.nextInt();
