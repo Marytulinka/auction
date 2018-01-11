@@ -20,11 +20,13 @@ public class Main {
         Scanner mc = new Scanner(System.in);
         int mainChoice = mc.nextInt();
         switch (mainChoice) {
+            case 4: break;
             case 1:
                 boolean whatToSHow = ShowItems.viewItems();
-                if(whatToSHow) break;
-                    else{
-                Menu.searchSortingAndShowBids();}
+                if (whatToSHow) break;
+                else {
+                    Menu.searchSortingAndShowBids();
+                }
                 Scanner sos = new Scanner(System.in);
                 int searchOrSorting = sos.nextInt();
                 switch (searchOrSorting) {
