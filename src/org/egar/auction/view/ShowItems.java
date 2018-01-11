@@ -2,6 +2,7 @@ package org.egar.auction.view;
 
 import org.egar.auction.Eceptions.EmptyCollectionOfItemException;
 import org.egar.auction.Eceptions.ItemOutOfCollection;
+import org.egar.auction.Eceptions.NameForSearchIsNotString;
 import org.egar.auction.model.Bid;
 import org.egar.auction.model.Category;
 import org.egar.auction.model.Item;
@@ -25,67 +26,72 @@ public class ShowItems {
                             System.out.println(item.getName() + "; код:" + item.getCode() + "; цена: "
                                     + item.getPrice());
                         }
-                        else {System.out.println("Нет товаров этой категории");}
                     }
                 }
                 System.out.println();
             }
         } catch (EmptyCollectionOfItemException exc) {
             System.out.println("Аукцион закрыт. Нет данных просмотра.");
-            isExc=true;
+            isExc = true;
         }
         return isExc;
     }
 
     public static void searhFromItemList(String name) {
 
-        if (Storage.items.isEmpty()) System.out.println("Аукцион закрыт. Нет данных просмотра.");
-        boolean retval = Storage.items.contains(name);
-        if (retval) {
-            for (Item item : Storage.items) {
-                if (name.equalsIgnoreCase(item.getName())) {
-                    if (!item.isSolded()) {
-                        System.out.println("Наименование товара: " + item.getName()
-                                + "; категория товара: " + item.getCategory().getDescription()
-                                + "; код:" + item.getCode()
-                                + "; цена: " + item.getPrice() + "; есть в наличии: да");
-                    } else {
-                        System.out.println("Наименование товара: " + item.getName()
-                                + "; категория товара: " + item.getCategory().getDescription()
-                                + "; код:" + item.getCode() + "; цена: "
-                                + item.getPrice() + "; есть в наличии: нет");
+        //if (Storage.items.isEmpty()) System.out.println("Аукцион закрыт. Нет данных просмотра.");
+        try {
+            if (!name.matches("[а-я]*")) throw new NameForSearchIsNotString();
+            boolean retval = Storage.items.contains(name);
+            if (retval) {
+                for (Item item : Storage.items) {
+                    if (name.equalsIgnoreCase(item.getName())) {
+                        if (!item.isSolded()) {
+                            System.out.println("Наименование товара: " + item.getName()
+                                    + "; категория товара: " + item.getCategory().getDescription()
+                                    + "; код:" + item.getCode()
+                                    + "; цена: " + item.getPrice() + "; есть в наличии: да");
+                        } else {
+                            System.out.println("Наименование товара: " + item.getName()
+                                    + "; категория товара: " + item.getCategory().getDescription()
+                                    + "; код:" + item.getCode() + "; цена: "
+                                    + item.getPrice() + "; есть в наличии: нет");
+                        }
                     }
                 }
+            } else {
+                System.out.println("Такого товара нет");
             }
-        } else {
-            System.out.println("Exception: Такого товара нет");
         }
-    }
+        catch (NameForSearchIsNotString exc){
+            System.out.println("Exception: Неверно введено наименование товара. Должно быть существительным. Проверьте правильность написания.");
+        }
+        }
 
     public static void viewBidOfItem(int code) {
 
-        try{
-        Item itemForAuction = null;
-        for (Item item : Storage.items) {
-            if (code == (item.getCode())) itemForAuction = item;
-        }
-        if(itemForAuction==null) throw new ItemOutOfCollection();
-        if (itemForAuction.isSolded())
-            System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - продан");
-        else {
-            if (Storage.bids.isEmpty())
-                System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - пока нет ставок");
+        try {
+            Item itemForAuction = null;
+            for (Item item : Storage.items) {
+                if (code == (item.getCode())) itemForAuction = item;
+            }
+            if (itemForAuction == null) throw new ItemOutOfCollection();
+            if (itemForAuction.isSolded())
+                System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - продан");
             else {
-                for (Bid bid : Storage.bids) {
-                    if (code == bid.getCode()) {
-                        System.out.println("Лот: " + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") ставки:\n");
-                        System.out.println("Пользователь: " + bid.getUser().getUserName() + ", ставка: " + bid.getValue());
+                if (Storage.bids.isEmpty())
+                    System.out.println("Лот:" + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") - пока нет ставок");
+                else {
+                    for (Bid bid : Storage.bids) {
+                        if (code == bid.getCode()) {
+                            System.out.println("Лот: " + itemForAuction.getName() + " (код:" + itemForAuction.getCode() + ") ставки:\n");
+                            System.out.println("Пользователь: " + bid.getUser().getUserName() + ", ставка: " + bid.getValue());
+                        }
                     }
                 }
             }
+        } catch (ItemOutOfCollection exc) {
+            System.out.println("Exception: Нет такого товара");
         }
-    }
-    catch(ItemOutOfCollection exc){
-        System.out.println("Exception: Нет такого товара");}
     }
 }
