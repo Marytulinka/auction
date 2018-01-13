@@ -15,14 +15,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         Menu.showMainMenu();
+
         Scanner mc = new Scanner(System.in);
         int mainChoice = mc.nextInt();
+
         switch (mainChoice) {
-            case 4: break;
             case 1:
-                boolean whatToSHow = ShowItems.viewItems();
+                boolean whatToSHow = ShowItems.showItems();
                 if (whatToSHow) break;
                 else {
                     Menu.searchSortingAndShowBids();
@@ -51,7 +51,7 @@ public class Main {
                             System.out.print("Введите код товара для просмотра ставок: ");
                             Scanner boi = new Scanner(System.in);
                             int bidOfItem = boi.nextInt();
-                            ShowItems.viewBidOfItem(bidOfItem);
+                            ShowItems.showBidOfItem(bidOfItem);
                             System.out.println("Хотите выбрать другой товар? Y/N");
                             String endViewOfBids = boi.nextLine();
                             if (endViewOfBids.equalsIgnoreCase("Y")) contViewOfBids = false;
@@ -60,39 +60,62 @@ public class Main {
                         }
                         break;
                     case 4:
-                        ShowItems.viewItems();
+                        ShowItems.showItems();
                         System.out.println("Тут будет условие для возврата в меню гостевого режима");
                     case 5:
                         System.out.println("Тут будет возврат в главное меню");
 
                 }
-            case 2:
-                boolean authMode = true;
-                while (authMode) {
-                    Scanner lp = new Scanner(System.in);
-                    System.out.println("Введите логин: ");
-                    String login = lp.nextLine();
-                    System.out.println("Введите пароль: ");
-                    String pass = lp.nextLine();
-                    UserService.login(login, pass);
-                    if (currentUser.getRole() == Role.ADMIN)
-                        Statistics.statistics();
-                    else System.out.print("Необходимо войти как администратор");
-                    System.out.print("Для выхода из профиля введите - 1;\nДля возврата в главное меню - 2.");
-                    int des = lp.nextInt();
-                    if (des == 1) {
-                        currentUser = null;
-                        authMode = false;
-                    }
-                    //if(des==2) {}
+            case 4:
+                break; //выход из программы
 
+            case 2: //Просмотр статистики администратором
+                System.out.println("Войдите как администратор");
+                boolean needToLoginLikeAdmin = true;
+                while (needToLoginLikeAdmin) { //авторизуемся до тех пор, пока пользователь не войдет как админ или не передумает
+                    UserService.login();
+                    if (currentUser.getRole() == Role.ADMIN) {
+                        Statistics.statistics();
+                        needToLoginLikeAdmin = false;
+                    } else {
+                        System.out.println("У данного пользователя нет прав для просмотра статистики");
+                        System.out.println("Перезайти - 1;\nВозврат в главное меню - 2.");
+                        Scanner lp = new Scanner(System.in);
+                        int desicion = lp.nextInt();
+                        if (desicion == 1) {
+                            currentUser = null;
+                            needToLoginLikeAdmin = true;
+                        }
+                    /*if (desicion == 2)
+                    {
+                        //возврат в мейнМеню
+                    }*/
+                        else break;
+                    }
                 }
+                break;
+            case 3:
+                boolean needToLogin = true;
+                while (needToLogin) {
+                    UserService.login(); //авторизуемся, пока не будет усеха. надо еще добавить выход в главное меню
+                    if (currentUser == null) {
+                        System.out.println("Повторите попытку авторизации");
+                        needToLogin = true;
+                    } else {
+                        needToLogin = false;
+                    }
+                }
+                Menu.showUserMenu();
+                Scanner uc = new Scanner(System.in);
+                int userChoice = uc.nextInt();
+                UserService.userChoice(userChoice);
 
 
         }
-
     }
+
 }
+
 
 
 
