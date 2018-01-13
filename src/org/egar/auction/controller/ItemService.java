@@ -6,6 +6,7 @@ import org.egar.auction.storage.Storage;
 import org.egar.auction.view.Menu;
 import org.egar.auction.view.ShowItems;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class ItemService {
@@ -35,7 +36,7 @@ public class ItemService {
                 int bid_value = sc123.nextInt();
                 for (Bid bid : Storage.bids) {
                     if ((code == bid.getCode()) && (bid_value <= max)) {
-                        System.out.println("Ставка должна быть выше предыдущей");
+                        System.out.println("Ставка должна быть больше предыдущей");
 
                     }
                 }
@@ -44,7 +45,7 @@ public class ItemService {
                         "; текущая цена: " + bid_value);
                 System.out.println("Продолжать аукцион? Y/N");
             case 2:
-                ShowItems.viewBidOfItem(code);
+                ShowItems.showBidOfItem(code);
         }
     }
 }
