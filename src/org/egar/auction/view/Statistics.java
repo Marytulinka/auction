@@ -8,17 +8,16 @@ import org.egar.auction.storage.Storage;
 
 public class Statistics {
 
-    public static void statistics() {
+    public static void statistics() { //[ГОТОВО]
 
         System.out.println("Статистика по пользователям: \n");
-        if (Storage.bids.isEmpty()&&Storage.purchase.isEmpty()) {
+        if (Storage.bids.isEmpty() && Storage.purchase.isEmpty()) {
             System.out.println("Нет данных для просмотра");
-        } else System.out.println("-- Пользователь -- Кол-во его лотов -- Кол-во его ставок");
+        } else System.out.println("Пользователь -- Кол-во его лотов -- Кол-во его ставок");
+        int amountOfItems = 0;
+        int amountOfBids = 0;
         for (User user : Storage.users) {
-            int amountOfItems = 0;
-            int amountOfBids = 0;
-            if (user.getRole() == Role.USER) {
-                for (Purchase purchase : Storage.purchase) {
+            for (Purchase purchase : Storage.purchase) {
                     if (user.getLogin().equals(purchase.getUser().getLogin()))
                         amountOfItems += 1;
                 }
@@ -26,8 +25,7 @@ public class Statistics {
                     if (user.getLogin().equals(bid.getUser().getLogin()))
                         amountOfBids += 1;
                 }
-            }
-            System.out.println(user.getUserName() + " " + amountOfItems + " " + amountOfBids);
+                System.out.println(user.getUserName() + " ---------- " + amountOfItems + " --------------- " + amountOfBids);
         }
     }
 }
