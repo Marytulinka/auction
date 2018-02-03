@@ -3,7 +3,7 @@ package org.egar.auction.model;
 /**
  * Характеристики товара: наименование, цена, категория, код, признак продаже товара
  */
-public class Item {
+public class Item implements Comparable<Item> {
 
     private String name;
     private Category category;
@@ -43,6 +43,12 @@ public class Item {
 
     public float getPriceForDelivery() {
         return priceForDelivery;
+    }
+
+
+    @Override
+    public int compareTo(Item item) {
+       return name.compareTo(item.getName());
     }
 }
 
